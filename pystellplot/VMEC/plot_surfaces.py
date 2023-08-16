@@ -4,7 +4,7 @@ from simsopt.geo import SurfaceRZFourier
 
 __all__ = ["plot_surfaces"]
 
-def plot_surfaces(wout_file, phi=0, ns=10, nt=512, ax=None, show=True):
+def plot_vmec_surfaces(wout_file, phi=0, ns=10, nt=512, ax=None, show=True):
     """plot_surfaces
     Plot VMEC surfaces on a poloidal plane
 
@@ -46,7 +46,7 @@ def plot_surfaces(wout_file, phi=0, ns=10, nt=512, ax=None, show=True):
          class implemented in simsopt.
     """
 
-    if as is None:
+    if ax is None:
         fig, ax = plt.subplots()
 
     surfaces = [SurfaceRZFourier.from_wout(wout_file, s=s) for s in np.linspace(0.0,1,ns)**2]
