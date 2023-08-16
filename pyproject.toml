@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pystellplot"
+version = "0.0.1"
+authors = [
+  { name="Antoine Baillod", email="ab5667@columbia.edu" },
+]
+description = "Various tools for plotting stellarator codes output"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/abaillod/pystellplot"
+"Bug Tracker" = "https://github.com/abaillod/pystellplot/issues"
