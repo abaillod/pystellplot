@@ -2,8 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from simsopt.geo import SurfaceRZFourier
 
-__all__ = ["plot_surfaces"]
-
 def plot_vmec_surfaces(wout_file, phi=0, ns=10, nt=512, ax=None, show=True):
     """plot_surfaces
     Plot VMEC surfaces on a poloidal plane
