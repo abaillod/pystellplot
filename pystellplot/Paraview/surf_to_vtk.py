@@ -4,7 +4,7 @@ from simsopt.geo import Surface
 import numpy as np
 
 
-def surf_to_vtk(filename:str, bs:BiotSavart, surf:Surface):
+def surf_to_vtk(filename:str, bs:BiotSavart, surf:Surface, close_poloidal:bool=True, close_toroidal:bool=True, normalized:bool=True):
     """
     Similar to simsopt.geo.surface.to_vtk, but now include
     the value of B.n on the surface
@@ -17,16 +17,22 @@ def surf_to_vtk(filename:str, bs:BiotSavart, surf:Surface):
     nphi = surf.quadpoints_phi.size
     B = np.sum(bs.B().reshape((nphi, ntheta, 3)) * n, axis=2)
 
-    # Close the torus
-    g = np.concatenate((g, g[:, :1, :]), axis=1)
-    n = np.concatenate((n, n[:, :1, :]), axis=1)
-    B = np.concatenate((B, B[:, :1]), axis=1)
+    if normalized:
+        modB = np.linalg.norm(bs.B().reshape((nphi, ntheta, 3)), axis=2)
+        B = B / modB
 
-    dphi = surf.quadpoints_phi[1] - surf.quadpoints_phi[0]
-    if 1 - surf.quadpoints_phi[-1] < 1.1 * dphi:
-        g = np.concatenate((g, g[:1, :, :]), axis=0)
-        n = np.concatenate((n, n[:1, :, :]), axis=0)
-        B = np.concatenate((B, B[:1, :]), axis=0)
+    # Close the torus
+    if close_poloidal:
+        g = np.concatenate((g, g[:, :1, :]), axis=1)
+        n = np.concatenate((n, n[:, :1, :]), axis=1)
+        B = np.concatenate((B, B[:, :1]), axis=1)
+
+    if close_toroidal:
+        dphi = surf.quadpoints_phi[1] - surf.quadpoints_phi[0]
+        if 1 - surf.quadpoints_phi[-1] < 1.1 * dphi:
+            g = np.concatenate((g, g[:1, :, :]), axis=0)
+            n = np.concatenate((n, n[:1, :, :]), axis=0)
+            B = np.concatenate((B, B[:1, :]), axis=0)
 
     ntor = g.shape[0]
     npol = g.shape[1]
