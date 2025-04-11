@@ -3,7 +3,6 @@ from simsopt.field import BiotSavart
 from simsopt.geo import Surface
 from ..Geometry.compute_surface import principal_curvature
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def surf_to_vtk(filename:str, bs:BiotSavart, surf:Surface, close_poloidal:bool=True, close_toroidal:bool=True, normalized:bool=True):
