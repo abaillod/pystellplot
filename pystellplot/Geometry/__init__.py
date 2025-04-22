@@ -1,3 +1,3 @@
 from .compute_surface import principal_curvature, gaussian_curvature, mean_curvature
 from .plot_surface import plot_cross_section
-from .magnetic_axis import get_magnetic_axis_boozer_surface, get_magnetic_axis_surface
+from .magnetic_axis import get_magnetic_axis_boozer_surface, get_magnetic_axis_surface, find_magnetic_axis
